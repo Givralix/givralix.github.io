@@ -1,4 +1,4 @@
-export function save_image_data(imageData) {
+export function save_image_data(imageName, imageData) {
     let w = imageData.width;
     let h = imageData.height;
     let canvas = document.createElement("canvas");
@@ -9,7 +9,10 @@ export function save_image_data(imageData) {
 
     canvas.toBlob((blob) => {
         console.log("Saving blob");
-        window.open(URL.createObjectURL(blob));
+        let a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = imageName;
+        a.click();
     }, (error) => {
         console.log("Failed to generate blob:");
         console.log(error)
